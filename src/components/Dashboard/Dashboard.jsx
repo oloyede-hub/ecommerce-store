@@ -64,10 +64,10 @@ const Dashboard = ({products}) => {
                     </Paper>
                 </div>
                 {/* CLothings */}
-                <section>
+               <section>
                     <h1 style={{ color: "#333", marginLeft: "40px",padding: "20px" }}>Clothings</h1>
                     <div className="container product" >
-                        {products.map((product,index) => (product.categories[0].slug === "clothings" ? <Product key={product} product={product} />: false )
+                        {products.map((product,index) => (product.categories.map((item) => item.slug === "clothings" ? <Product key={product} product={product} /> : null ))
                         )}
                     </div>
                 </section>
@@ -75,7 +75,23 @@ const Dashboard = ({products}) => {
                 <section>
                     <h1 style={{ color: "#333", marginLeft: "40px",padding: "20px" }}>Electronics</h1>
                     <div className="container product" >
-                        {products.map((product,index) => (product.categories[0].slug === "electronics" ? <Product key={product} product={product} />: false )
+                        {products.map((product,index) => (product.categories.map((item) => item.slug === "electronics" ? <Product key={product} product={product} /> : null ))
+                        )}
+                    </div>
+                </section>
+                {/* Jewellery */}
+                 <section>
+                    <h1 style={{ color: "#333", marginLeft: "40px",padding: "20px" }}>Jewellerys</h1>
+                    <div className="container product" >
+                        {products.map((product,index) => (product.categories.map((item) => item.slug === "jewellerys" ? <Product key={product} product={product} /> : null ))
+                        )}
+                    </div>
+                </section>
+                {/* Watches */}
+                 <section>
+                    <h1 style={{ color: "#333", marginLeft: "40px",padding: "20px" }}>Watches</h1>
+                    <div className="container product" >
+                        {products.map((product,index) => (product.categories.map((item) => item.slug === "watches" || item.name === "Watches" ? <Product key={product} product={product} /> : null ))
                         )}
                     </div>
                 </section>

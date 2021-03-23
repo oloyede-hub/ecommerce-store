@@ -28,15 +28,15 @@ const App = () => {
     }
     
     const fetchCategoriesList = async () => {
-            const categories = await commerce.categories.list();
-            setCategories(categories);
+            const { data } = await commerce.categories.list();
+            setCategories(data);
     }
 
 
-    
 
   
-    console.log(products)
+    console.log(products);
+    console.log( categories);
 
     useEffect(() => {
         fetchProducts();

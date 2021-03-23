@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -16,6 +17,10 @@ const useStyles = makeStyles({
         display: "flex",
         flexDirection: "column",
     },
+    namePrice: {
+        display: "flex",
+        justifyContent: "space-between"
+    }
    
 });
 
@@ -28,7 +33,7 @@ export default function Product({ product }) {
     };
 
     return (
-        <Card className={classes.root}>
+        <Card component={Link} className={classes.root}>
             <CardActionArea className={classes.top}>
                 <CardMedia
                     component="img"
@@ -38,9 +43,14 @@ export default function Product({ product }) {
 
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {product.name}
-                    </Typography>
+                    <div className={classes.namePrice}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {product.name}
+                        </Typography>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {product.price.formatted_with_symbol}
+                        </Typography>
+                    </div>
                     <Typography variant="body2" color="textSecondary" component="p" dangerouslySetInnerHTML={{ __html: truncateDescription(product.description,80) }} />
                 </CardContent>
             </CardActionArea>
