@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import Product from "./Product/Product"
 import { Paper } from "@material-ui/core"
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
@@ -15,7 +16,7 @@ import BeachAccessOutlinedIcon from '@material-ui/icons/BeachAccessOutlined';
 
 import "./dashboard.css"
 
-const Dashboard = ({products}) => {
+const Dashboard = ({products, onAddToCarts}) => {
 
 
 
@@ -27,13 +28,13 @@ const Dashboard = ({products}) => {
                     <div className="sidemenu">
                         <ul>
                             <li className="cat"><ReorderOutlinedIcon className="icon iconLeft" /><p><span>CATEGORIES</span><ArrowForwardIosOutlinedIcon className="icon iconRight"   /></p></li>
-                            <li><a href="#"><BusinessCenterOutlinedIcon className="icon iconLeft" /><p> <span>Clothings</span><ArrowForwardIosOutlinedIcon  className="icon iconRight" /></p></a></li>
-                            <li><a href="#"><ComputerOutlinedIcon className="icon iconLeft" /> <p><span>Electronics</span><ArrowForwardIosOutlinedIcon className="icon iconRight" /></p></a></li>
-                            <li><a href="#"><BeachAccessOutlinedIcon className="icon iconLeft" /> <p><span>jewellerys</span><ArrowForwardIosOutlinedIcon className="icon iconRight" /></p></a></li>
-                            <li><a href="#"> <BrokenImageIcon className="icon iconLeft" /><p> <span>Health & Beauty</span><ArrowForwardIosOutlinedIcon className="icon iconRight" /></p></a></li>
-                            <li><a href="#"><AccessTimeOutlinedIcon className="icon iconLeft" /><p> <span>Watches</span><ArrowForwardIosOutlinedIcon className="icon iconRight" /></p></a></li>
-                            <li><a href="#"> <TelegramIcon className="icon iconLeft" /><p> <span>Shoes</span><ArrowForwardIosOutlinedIcon className="icon iconRight" /></p></a></li>
-                            <li><a href="#"><SportsSoccerOutlinedIcon className="icon iconLeft" /> <p><span>Sport</span><ArrowForwardIosOutlinedIcon className="icon iconRight" /></p></a></li>
+                            <li><Link to=""><BusinessCenterOutlinedIcon className="icon iconLeft" /><p> <span>Clothings</span><ArrowForwardIosOutlinedIcon  className="icon iconRight" /></p></Link></li>
+                            <li><Link to=""><ComputerOutlinedIcon className="icon iconLeft" /> <p><span>Electronics</span><ArrowForwardIosOutlinedIcon className="icon iconRight" /></p></Link></li>
+                            <li><Link to=""><BeachAccessOutlinedIcon className="icon iconLeft" /> <p><span>jewellerys</span><ArrowForwardIosOutlinedIcon className="icon iconRight" /></p></Link></li>
+                            <li><Link to=""> <BrokenImageIcon className="icon iconLeft" /><p> <span>Health & Beauty</span><ArrowForwardIosOutlinedIcon className="icon iconRight" /></p></Link></li>
+                            <li><Link to=""><AccessTimeOutlinedIcon className="icon iconLeft" /><p> <span>Watches</span><ArrowForwardIosOutlinedIcon className="icon iconRight" /></p></Link></li>
+                            <li><Link to=""> <TelegramIcon className="icon iconLeft" /><p> <span>Shoes</span><ArrowForwardIosOutlinedIcon className="icon iconRight" /></p></Link></li>
+                            <li><Link to=""><SportsSoccerOutlinedIcon className="icon iconLeft" /> <p><span>Sport</span><ArrowForwardIosOutlinedIcon className="icon iconRight" /></p></Link></li>
                         </ul>
                     </div>
                     <Paper className="dashboard_card">
@@ -63,11 +64,11 @@ const Dashboard = ({products}) => {
                         </div>
                     </Paper>
                 </div>
-                {/* CLothings */}
+                {/* Clothings */}
                <section>
                     <h1 style={{ color: "#333", marginLeft: "40px",padding: "20px" }}>Clothings</h1>
                     <div className="container product" >
-                        {products.map((product,index) => (product.categories.map((item) => item.slug === "clothings" ? <Product key={product} product={product} /> : null ))
+                        {products.map((product,index) => (product.categories.map((item) => item.slug === "clothings" ? <Product id={index} onAddToCarts={onAddToCarts}  key={product.id} product={product} /> : null ))
                         )}
                     </div>
                 </section>
@@ -75,7 +76,7 @@ const Dashboard = ({products}) => {
                 <section>
                     <h1 style={{ color: "#333", marginLeft: "40px",padding: "20px" }}>Electronics</h1>
                     <div className="container product" >
-                        {products.map((product,index) => (product.categories.map((item) => item.slug === "electronics" ? <Product key={product} product={product} /> : null ))
+                        {products.map((product,index) => (product.categories.map((item) => item.slug === "electronics" ? <Product id={index} onAddToCarts={onAddToCarts}  key={product.id} product={product} /> : null ))
                         )}
                     </div>
                 </section>
@@ -83,7 +84,7 @@ const Dashboard = ({products}) => {
                  <section>
                     <h1 style={{ color: "#333", marginLeft: "40px",padding: "20px" }}>Jewellerys</h1>
                     <div className="container product" >
-                        {products.map((product,index) => (product.categories.map((item) => item.slug === "jewellerys" ? <Product key={product} product={product} /> : null ))
+                        {products.map((product,index) => (product.categories.map((item) => item.slug === "jewellerys" ? <Product id={index} onAddToCarts={onAddToCarts} key={ product.id} product={product} /> : null ))
                         )}
                     </div>
                 </section>
@@ -91,7 +92,7 @@ const Dashboard = ({products}) => {
                  <section>
                     <h1 style={{ color: "#333", marginLeft: "40px",padding: "20px" }}>Watches</h1>
                     <div className="container product" >
-                        {products.map((product,index) => (product.categories.map((item) => item.slug === "watches" || item.name === "Watches" ? <Product key={product} product={product} /> : null ))
+                        {products.map((product,index) => (product.categories.map((item) => item.slug === "watches" || item.name === "Watches" ? <Product id={index} key={product.id} product={product} />  : null ))
                         )}
                     </div>
                 </section>

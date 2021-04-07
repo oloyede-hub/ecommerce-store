@@ -13,7 +13,13 @@ import FavoriteBorderSharpIcon from '@material-ui/icons/FavoriteBorderSharp';
 
 
 
-const Navbar = () => {
+const Navbar = ({ totalItems, totalAmount }) => {
+
+
+
+   
+    if( !totalAmount ) return <div>What the fuck is this</div>
+
     return (
         <>
             <div className="nav_sub">
@@ -50,19 +56,19 @@ const Navbar = () => {
                             </select>
                             <input placeholder="Search here..." type="text" name="categories" id="categories" />
                             <button className="btn" type="submit">
-                                <SearchIcon classname="icon" />
+                                <SearchIcon className="icon" />
                             </button>
                         </form>
                     </div>
                     <div className="header_cartButton">
                         <Button className="header_cartButton" arial-label="Show cart Item" >
                             <ShoppingCart />
-                            <Badge style={{ marginLeft: "15px", marginRight: "15px" }} badgeContent={4} color="primary" />
-                            <Typography >CART - #300</Typography>
+                            <Badge style={{ marginLeft: "15px", marginRight: "15px" }} badgeContent={totalItems} color="primary" />
+                            <Typography >CART - {totalAmount}</Typography>
                         </Button>
                     </div>
                 </div>
-            </nav>
+           </nav>
             <div className="categories">
                 <ul>
                     <li><a href="#">HOME</a></li>

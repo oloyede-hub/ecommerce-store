@@ -6,9 +6,7 @@ import {BrowserRouter as Router , Route,Switch} from "react-router-dom";
 
 
 
-
-import {ThemeProvider, createMuiTheme} from "@material-ui/core"
-
+import {ThemeProvider, createMuiTheme} from "@material-ui/core";
 
 
 
@@ -19,6 +17,7 @@ const App = () => {
     
     const [products , setProducts] = useState([]);
     const [categories, setCategories] = useState({});
+    const [cart, setCart] = useState({})
     
     
 
@@ -34,12 +33,28 @@ const App = () => {
 
 
 
+    const fetchCart= async () => {
+        const  data = await commerce.cart.retrieve();
+        setCart(data);
+    }
+
+    // 
+
+    const addToCarts = async (productId, quantity) => {
+        const{ cart } = await commerce.cart.add(productId, quantity);
+        setCart(cart);
+    }
+
+// const handleUpdateCart = async(productId, quantity) => {
+//     const { cart } = await commerce.cart.update(productId, { quantity });
+//     setCart(cart);
+// }
   
-    console.log(products);
-    console.log( categories);
+    console.log(cart);
 
     useEffect(() => {
         fetchProducts();
+        fetchCart();
         fetchCategoriesList();
     },[])
 
@@ -55,20 +70,19 @@ const App = () => {
             background: {
                 default: "#F3F3F3"
             }
-            
         },
-        
-   })
+   });
+
     return (
         <Router>
         <ThemeProvider className="body" theme={theme}>
-            <Navbar />
+            <Navbar totalItems={cart.total_items}  />
             <Switch>
             <Route exact path="/">
-                <Dashboard categories={categories} products={products} />
+                <Dashboard onAddToCarts={addToCarts}   categories={categories} products={products} />
             </Route>
-            <Route exact path="/">
-                <ProductPage categories={categories} products={products} />
+            <Route exact path="/showproduct">
+                <ProductPage categories={categories} />
             </Route>
             </Switch>
         </ThemeProvider>

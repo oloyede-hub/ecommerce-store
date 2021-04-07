@@ -20,20 +20,25 @@ const useStyles = makeStyles({
     namePrice: {
         display: "flex",
         justifyContent: "space-between"
+    },
+    link: {
+        color: "red"
     }
    
 });
 
-export default function Product({ product }) {
+export default function Product({ product,onAddToCarts,id }) {
+
     const classes = useStyles();
 
-    // console.log(JSON.stringify(product, null, 2));
     const truncateDescription = (str, maxlength) => {
         return (str.length > maxlength) ? str.slice(0, maxlength - 1) + '…' : str; 
     };
 
+ 
+
     return (
-        <Card component={Link} className={classes.root}>
+        <Card   className={classes.root}>
             <CardActionArea className={classes.top}>
                 <CardMedia
                     component="img"
@@ -55,13 +60,10 @@ export default function Product({ product }) {
                 </CardContent>
             </CardActionArea>
             <CardActions className={classes.bottom}>
-                <Button size="small" color="secondary">
-                    +
-                </Button>
-                <Button size="small" color="secondary">
-                    -
-                </Button>
-                <Button size="small" color="secondary">
+               <Link to={{ pathname:`/scriptures/${id}`, state:{ product: product}}}  className={classes.link}  to="/showproduct">
+                   Read More
+               </Link>
+                <Button onClick={() => onAddToCarts(product.id, 1)} size="small" color="secondary">
                 <AddShoppingCartIcon className="icon" />
                     Add To Cart
                 </Button>
